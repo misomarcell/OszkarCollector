@@ -1,4 +1,5 @@
 ﻿using HtmlAgilityPack;
+using OszkarCollector.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,11 @@ namespace Collector.Pages
 {
     class RidePage
     {
-        public HtmlDocument Document { get; set; }
-        public Uri PageUri { get; set; }
-        public string Vehicle { get; set; }
-        public string Price { get; set; }
+        public HtmlDocument Document { get; }
+        public Uri PageUri { get;}
+        public string Vehicle { get; }
+        public string Price { get; }
+        public Driver Driver { get; }
 
         public RidePage(HtmlDocument document, Uri pageUri)
         {
@@ -20,6 +22,7 @@ namespace Collector.Pages
             PageUri = pageUri;
             Vehicle = GetVehicleName();
             Price = GetPrice();
+            Driver = GetDriver();
         }
 
         private string GetVehicleName()
@@ -36,6 +39,15 @@ namespace Collector.Pages
             var price = priceTitle.NextSibling.NextSibling.InnerText.Replace("/ fő", String.Empty).Replace("&", String.Empty).Trim();
 
             return price;
+        }
+
+        private Driver GetDriver()
+        {
+            var driverTitle = Document.DocumentNode.SelectSingleNode("//dt[text()='A hirdető:']");
+            var driverName = driverTitle.NextSibling.NextSibling.InnerText.Trim();
+            var driverPage = driverTitle.NextSibling.NextSibling.FirstChild.GetAttributeValue("href", String.Empty);
+
+            return new Driver(driverName, new Uri(driverPage));
         }
     }    
 }
