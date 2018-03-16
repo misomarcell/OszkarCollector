@@ -1,8 +1,8 @@
-﻿using Models.Pages;
+﻿using Domain.Models;
+using Domain.Pages;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using Models.Objects;
 
 namespace Repositories
 {

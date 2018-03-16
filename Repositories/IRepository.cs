@@ -1,5 +1,4 @@
-﻿using Models.Objects;
-using Models.Pages;
+﻿using Domain.Pages;
 using System.Collections.Generic;
 
 namespace Repositories

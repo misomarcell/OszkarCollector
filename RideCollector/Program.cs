@@ -13,7 +13,7 @@ namespace Collector
     {
         public static void Main(string[] args)
         {
-            var manager = new RidesManager();
+            var manager = new OszkarCollector.Collector();
 
             manager.LoadPages();
         }

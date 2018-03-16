@@ -1,19 +1,17 @@
 ﻿using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace Models.Pages
+namespace Domain.Pages
 {
-    public class ListPage
+    public class CatalogPage
     {
-        public Uri NextPage { get;}
+        public Uri NextPage { get; }
         public HtmlDocument Document { get; }
         public List<Uri> Rides { get; }
 
-        public ListPage(HtmlDocument document)
+        public CatalogPage(HtmlDocument document)
         {
             Document = document;
             NextPage = GetNextPage();

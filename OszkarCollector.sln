@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Website", "Website\Website.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repositories", "Repositories\Repositories.csproj", "{2FF9FA2D-A49D-4AEA-B89C-8A9FF91D8967}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csproj", "{18FAED20-339E-4A19-86A0-8C95907D86EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{18FAED20-339E-4A19-86A0-8C95907D86EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collector", "Collector\Collector.csproj", "{490FCF9D-A73F-4A81-826A-432B738AB005}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RideCollector", "RideCollector\RideCollector.csproj", "{490FCF9D-A73F-4A81-826A-432B738AB005}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
