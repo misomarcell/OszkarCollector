@@ -1,5 +1,5 @@
-﻿using HtmlAgilityPack;
-using OszkarCollector.Models;
+﻿using Collector.Models;
+using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Collector.Pages
 {
-    class RidePage
+    public class RidePage
     {
         public HtmlDocument Document { get; }
         public Uri PageUri { get;}

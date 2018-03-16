@@ -49,10 +49,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Driver.cs" />
+    <Compile Include="Models\Vehicle.cs" />
     <Compile Include="Pages\ListPage.cs" />
     <Compile Include="Pages\RidePage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RidesManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
