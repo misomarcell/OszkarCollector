@@ -1,5 +1,5 @@
 ﻿using HtmlAgilityPack;
-using Collector.Pages;
+using OszkarCollector;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +13,9 @@ namespace Collector
     {
         public static void Main(string[] args)
         {
+            var manager = new RidesManager();
 
+            manager.LoadPages();
         }
     }
 }
