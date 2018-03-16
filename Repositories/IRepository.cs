@@ -6,7 +6,7 @@ namespace Repositories
 {
     public interface IRepository
     {
-        List<RidePage> GetAllRides();
+        List<RidePage> GetRides(int page);
         RidePage GetRide(string id);
         int AddRide(RidePage page);
     }

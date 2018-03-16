@@ -13,6 +13,7 @@ namespace Models.Pages
     {
         [JsonIgnore]
         public HtmlDocument Document { get; }
+        public int Id { get; set; }
         public Uri PageUri { get; set; }
         public string Price { get; set; }
         public Vehicle Vehicle { get; set; }

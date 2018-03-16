@@ -33,9 +33,9 @@ namespace Repositories
             return (int)command.LastInsertedId;
         }
 
-        public List<RidePage> GetAllRides()
+        public List<RidePage> GetRides(int page)
         {
-            MySqlCommand command = new MySqlCommand(@"SELECT * FROM `rides`;", Connection);
+            MySqlCommand command = new MySqlCommand($@"SELECT * FROM `rides` LIMIT 25 OFFSET {page*25};", Connection);
             var result = command.ExecuteReader();
 
             var rides = new List<RidePage>();
@@ -43,6 +43,7 @@ namespace Repositories
             {
                 var ride = new RidePage()
                 {
+                    Id = result.GetInt32(0),
                     PageUri = new Uri(result.GetString(1)),
                     Price = result.GetString(2),
                     Vehicle = new Vehicle()

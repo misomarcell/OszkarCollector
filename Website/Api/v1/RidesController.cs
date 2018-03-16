@@ -23,9 +23,9 @@ namespace Website.Api.v1
         }
 
         [HttpGet]
-        public List<RidePage> Get()
+        public List<RidePage> Get(int page = 0)
         {
-            var rides = Repository.GetAllRides();
+            var rides = Repository.GetRides(page);
             return rides;
         }
     }
