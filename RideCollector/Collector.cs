@@ -23,6 +23,7 @@ namespace OszkarCollector
         {
             CatalogPage listPage = new CatalogPage(htmlWeb.Load(HOMEPAGE_URL));
 
+            Repository.Clean();
             while (listPage.NextPage != null)
             {
                 foreach (var link in listPage.Rides)

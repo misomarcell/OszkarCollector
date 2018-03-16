@@ -8,5 +8,6 @@ namespace Repositories
         List<RidePage> GetRides(int page);
         RidePage GetRide(string id);
         int AddRide(RidePage page);
+        void Clean();
     }
 }

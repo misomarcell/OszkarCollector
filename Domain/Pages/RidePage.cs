@@ -35,7 +35,7 @@ namespace Domain.Pages
         private Vehicle GetVehicle()
         {
             var vehicleTitle = Document.DocumentNode.SelectSingleNode("//dt[text()='Gépjármű:']");
-            var vehicleName = vehicleTitle.NextSibling.NextSibling.InnerText.Trim();
+            var vehicleName = vehicleTitle.NextSibling.NextSibling.InnerText.Trim().Replace("  ", " ");
 
             var brand = vehicleName.Split(" ".ToCharArray()[0]);
             var model = brand[1].Replace(",", "");
