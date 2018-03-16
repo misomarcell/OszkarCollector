@@ -1,11 +1,12 @@
-﻿using Collector;
-using Collector.Pages;
-using HtmlAgilityPack;
+﻿using HtmlAgilityPack;
+using Models.Pages;
+using Models.Objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Repositories;
 
 namespace Collector
 {
@@ -13,28 +14,26 @@ namespace Collector
     {
         private const string HOMEPAGE_URL = "https://utitars.oszkar.com/hely-1/";
 
-        List<RidePage> pages = new List<RidePage>();
+        MySqlRepository Repository = new MySqlRepository();
         HtmlWeb htmlWeb = new HtmlWeb();
 
         public RidesManager()
         {
-            Task.Run(() => LoadPages());
+            //Task.Run(() => LoadPages());
         }
 
-        public async void LoadPages()
+        public void LoadPages()
         {
             ListPage listPage = new ListPage(htmlWeb.Load(HOMEPAGE_URL));
 
-            // var count = 0;
             while (listPage.NextPage != null)
             {
                 foreach (var link in listPage.Rides)
                 {
                     RidePage ridePage = new RidePage(htmlWeb.Load(link), link);
 
-                    pages.Add(ridePage);
-                    //count++;
-                    //Console.WriteLine($"{count}) {ridePage.Vehicle.ToString()} \t {ridePage.Price}");
+                    Repository.AddRide(ridePage);
+                    Console.WriteLine(ridePage.Vehicle.ToString());
                 }
 
                 listPage = new ListPage(htmlWeb.Load(listPage.NextPage));
@@ -43,9 +42,5 @@ namespace Collector
             Console.ReadKey();
         }
 
-        public List<RidePage> GetPages()
-        {
-            return pages;
-        }
     }
 }

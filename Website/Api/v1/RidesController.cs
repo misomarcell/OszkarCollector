@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Collector;
-using Collector.Pages;
+using Models.Pages;
+using Repositories;
+using Newtonsoft.Json;
 
 namespace Website.Api.v1
 {
@@ -13,23 +15,18 @@ namespace Website.Api.v1
     [Route("api/v1/rides")]
     public class RidesController : Controller
     {
-        public RidesManager ridesManager { get; set; }
+        IRepository Repository;
 
         public RidesController()
         {
-            ridesManager = new RidesManager();
+            Repository = new MySqlRepository();
         }
 
         [HttpGet]
-        public List<string> Get()
+        public List<RidePage> Get()
         {
-            var pages = ridesManager.GetPages();
-            var list = new List<string>();
-            foreach (var item in pages)
-            {
-                list.Add(item.Vehicle.ToString());
-            }
-            return list;
+            var rides = Repository.GetAllRides();
+            return rides;
         }
     }
 }

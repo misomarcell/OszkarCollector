@@ -4,16 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Collector.Models
+namespace Models.Objects
 {
     public class Driver
     {
-        public string Username { get; }
-        public Uri UserPage { get; }
+        public string Username { get; set; }
+        public Uri UserPage { get; set; }
+
+        public Driver() { }
 
         public Driver(string userName, Uri userPage)
         {
-            Username = Username;
+            Username = userName;
             UserPage = userPage;
         }
     }

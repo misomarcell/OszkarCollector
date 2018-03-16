@@ -4,13 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Collector.Models
+namespace Models.Objects
 {
     public class Vehicle
     {
-        public string Brand { get; }
+        public string Brand { get; set; }
         public string Model { get; set; }
         public int Year { get; set; }
+
+        public Vehicle() { }
 
         public Vehicle(string brand, string model, int year)
         {

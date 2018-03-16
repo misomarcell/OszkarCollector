@@ -28,6 +28,8 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CoreCollector\Collector.csproj" />
+    <ProjectReference Include="..\Models\Models.csproj" />
+    <ProjectReference Include="..\Repositories\Repositories.csproj" />
   </ItemGroup>
 
 </Project>

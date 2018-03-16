@@ -1,20 +1,24 @@
-﻿using Collector.Models;
-using HtmlAgilityPack;
+﻿using HtmlAgilityPack;
+using Models.Objects;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Collector.Pages
+namespace Models.Pages
 {
     public class RidePage
     {
+        [JsonIgnore]
         public HtmlDocument Document { get; }
-        public Uri PageUri { get;}
-        public Vehicle Vehicle { get; }
-        public string Price { get; }
-        public Driver Driver { get; }
+        public Uri PageUri { get; set; }
+        public string Price { get; set; }
+        public Vehicle Vehicle { get; set; }
+        public Driver Driver { get; set; }
+
+        public RidePage() { }
 
         public RidePage(HtmlDocument document, Uri pageUri)
         {
@@ -59,6 +63,11 @@ namespace Collector.Pages
             var driverPage = driverTitle.NextSibling.NextSibling.FirstChild.GetAttributeValue("href", String.Empty);
 
             return new Driver(driverName, new Uri(driverPage));
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
         }
     }    
 }

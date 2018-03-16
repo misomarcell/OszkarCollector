@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Collector.Pages
+namespace Models.Pages
 {
-    internal class ListPage
+    public class ListPage
     {
         public Uri NextPage { get;}
         public HtmlDocument Document { get; }

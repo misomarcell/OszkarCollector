@@ -6,7 +6,9 @@ namespace Collector
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var manager = new RidesManager();
+
+            manager.LoadPages();
         }
     }
 }
