@@ -32,10 +32,10 @@ namespace Domain.Pages
                 Price = GetPrice();
                 Driver = GetDriver();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-                throw ex;
+                Console.WriteLine($"Page not found: {pageUri}");
             }
             finally
             {

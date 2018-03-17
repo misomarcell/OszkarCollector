@@ -35,7 +35,7 @@ namespace Repositories
 
         public List<RidePage> GetRides(int page)
         {
-            MySqlCommand command = new MySqlCommand($@"SELECT DISTINCT * FROM `rides` GROUP BY vehicle_brand, vehicle_model ORDER BY `vehicle_year` DESC LIMIT 25 OFFSET {page * 25};", Connection);
+            MySqlCommand command = new MySqlCommand($@"SELECT DISTINCT * FROM `rides` GROUP BY vehicle_brand, vehicle_model, vehicle_year ORDER BY `vehicle_year` DESC LIMIT 25 OFFSET {page * 25};", Connection);
             var result = command.ExecuteReader();
 
             var rides = new List<RidePage>();

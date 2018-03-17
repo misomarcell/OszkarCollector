@@ -3,6 +3,10 @@
     font-size: 14px;
 }
 
+link{
+    color: black;
+}
+
 .main-container{
     margin: auto;
     width: 450px;

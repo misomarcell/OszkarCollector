@@ -1,0 +1,17 @@
+
+@model Domain.Models.Vehicle
+@{
+    ViewData["Title"] = Model.Brand;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Ride</title>
+</head>
+<body>
+    Brand: @Model.Brand Model: @Model.Model Year: @Model.Year
+</body>
+</html>

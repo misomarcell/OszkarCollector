@@ -12,6 +12,7 @@ namespace OszkarCollector
 {
     public class Collector
     {
+        // /pageexact-1000
         private const string HOMEPAGE_URL = "https://utitars.oszkar.com/hely-1/";
 
         MySqlRepository Repository = new MySqlRepository();
@@ -24,19 +25,23 @@ namespace OszkarCollector
             CatalogPage listPage = new CatalogPage(htmlWeb.Load(HOMEPAGE_URL));
 
             Repository.Clean();
-            while (listPage.NextPage != null)
+
+            var prevPageNumber = 0;
+            while (listPage.PageNumber > prevPageNumber)
             {
                 foreach (var link in listPage.Rides)
                 {
-                    RidePage ridePage = new RidePage(htmlWeb.Load(link), link);
+                    RidePage ridePage = new RidePage(htmlWeb.Load(link), link);  
 
                     var index = Repository.AddRide(ridePage);
                     Console.WriteLine($"{index}) " + ridePage.Vehicle.ToString());
                 }
 
+                prevPageNumber = listPage.PageNumber;
                 listPage = new CatalogPage(htmlWeb.Load(listPage.NextPage));
             }
 
+            Console.WriteLine("No more pages found. Press any key to exit...");
             Console.ReadKey();
         }
 

@@ -32,8 +32,13 @@
 function displayRides(rides)
 {
     $.each(rides, function () {
-        $(".rides-catalog").append("<li><a target='_blank' href='" + this.pageUri + "'>" + this.vehicle.brand + " " + this.vehicle.model + " " + this.vehicle.year + "</a></li>");
+        $(".rides-catalog").append("<li><a href='" + getRideUri(this.vehicle) + "'>" + this.vehicle.brand + " " + this.vehicle.model + " " + this.vehicle.year + "</a></li>");
     });
 
     $("#count").text(rides.length + " találat");
+}
+
+function getRideUri(vehicle)
+{
+    return "./catalog/ride?Brand=" + vehicle.brand + "&Model=" + vehicle.model + "&Year=" + vehicle.year;
 }

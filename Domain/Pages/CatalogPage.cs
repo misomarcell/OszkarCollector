@@ -10,14 +10,26 @@ namespace Domain.Pages
         public Uri NextPage { get; }
         public HtmlDocument Document { get; }
         public List<Uri> Rides { get; }
+        public int PageNumber { get; }
 
         public CatalogPage(HtmlDocument document)
         {
             Document = document;
-            NextPage = GetNextPage();
             Rides = GetRides();
+            PageNumber = GetPageNumber();
+            try
+            {
+                NextPage = GetNextPage();
+            }
+            catch (Exception)
+            {
 
-            Document = null;
+                NextPage = null;
+            }
+            finally
+            {
+                Document = null;
+            }   
         }
 
         private Uri GetNextPage()
@@ -27,6 +39,14 @@ namespace Domain.Pages
             var nextPage = activePage.NextSibling.NextSibling.FirstChild.GetAttributeValue("href", String.Empty);
 
             return new Uri(nextPage);
+        }
+
+        private int GetPageNumber()
+        {
+            var pagination = Document.DocumentNode.SelectSingleNode("//div[@class='pagination center ']");
+            var activePage = pagination.SelectSingleNode("//li[@class='active']");
+
+            return Convert.ToInt32(activePage.FirstChild.InnerText.Trim());
         }
 
         private List<Uri> GetRides()
