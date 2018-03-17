@@ -25,6 +25,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Api\v1\" />
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj" />

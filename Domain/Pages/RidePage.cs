@@ -25,11 +25,24 @@ namespace Domain.Pages
         {
             Document = document;
             PageUri = pageUri;
-            Vehicle = GetVehicle();
-            Price = GetPrice();
-            Driver = GetDriver();
 
-            Document = null;
+            try
+            {
+                Vehicle = GetVehicle();
+                Price = GetPrice();
+                Driver = GetDriver();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                Document = null;
+            }
+
+            
         }
 
         private Vehicle GetVehicle()

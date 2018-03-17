@@ -34,4 +34,6 @@ function displayRides(rides)
     $.each(rides, function () {
         $(".rides-catalog").append("<li><a target='_blank' href='" + this.pageUri + "'>" + this.vehicle.brand + " " + this.vehicle.model + " " + this.vehicle.year + "</a></li>");
     });
+
+    $("#count").text(rides.length + " találat");
 }
