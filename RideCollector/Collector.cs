@@ -1,4 +1,4 @@
-﻿using Collector;
+﻿using RideCollector;
 using Domain.Pages;
 using HtmlAgilityPack;
 using Repositories;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OszkarCollector
+namespace RideCollector
 {
     public class Collector
     {

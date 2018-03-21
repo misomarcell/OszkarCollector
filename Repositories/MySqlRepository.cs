@@ -12,7 +12,9 @@ namespace Repositories
 
         public MySqlRepository()
         {
-            Connection = new MySqlConnection("server=127.0.0.1;user id=root;password=root;port=3306;database=oszkar;");
+            //Connection = new MySqlConnection("server=127.0.0.1;user id=root;password=root;port=3306;database=oszkar;");
+            Connection = new MySqlConnection("server=oszkar-remote.mysql.database.azure.com;user id=remote@oszkar-remote;password=Szalmakalap123;port=3306;database=oszkar;");
+
             Connection.Open();
         }
 
