@@ -7,16 +7,16 @@ using Domain.Models;
 
 namespace Website.Controllers
 {
-    public class CatalogController : Controller
+    public class HomeController : Controller
     {
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult Ride(Vehicle vehicle)
+        public IActionResult Rides(Vehicle vehicle)
         {
-            return View("Ride", vehicle);
+            return View("Rides", vehicle);
         }
     }
 }

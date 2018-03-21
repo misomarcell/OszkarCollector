@@ -17,11 +17,15 @@ link{
     list-style-type: none;
 }
 
-.rides-catalog li{
+.vehicle-count {
+    float: right;
+}
+
+.rides-catalog li {
     list-style: none;
     background-color: gainsboro;
     margin-top: 2px;
-    padding: 3px 0 3px 3px;
+    padding: 3px 10px 3px 3px;
     width: calc(100% - 3px);
 }
 

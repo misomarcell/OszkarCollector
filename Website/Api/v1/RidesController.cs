@@ -1,12 +1,12 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Domain.Models;
+using Domain.Pages;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Repositories;
-using Newtonsoft.Json;
-using Domain.Pages;
 
 namespace Website.Api.v1
 {
@@ -14,18 +14,12 @@ namespace Website.Api.v1
     [Route("api/v1/rides")]
     public class RidesController : Controller
     {
-        IRepository Repository;
-
-        public RidesController()
-        {
-            Repository = new MySqlRepository();
-        }
-
         [HttpGet]
-        public List<RidePage> Get(int page = 0)
+        public List<RidePage> Get(Vehicle vehicle, int page = 0)
         {
-            var rides = Repository.GetRides(page);
-            return rides;
+            var repository = new MySqlRepository();
+
+            return repository.GetVehicleRides(page, vehicle);
         }
     }
 }

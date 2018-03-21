@@ -1,6 +1,6 @@
 ﻿$(function () {
-    $.get("api/v1/rides", function (data) {
-        displayRides(data);
+    $.get("api/v1/vehicles", function (data) {
+        displayRideStats(data);
     });
 
     $(".next").on("click", function () {
@@ -11,7 +11,7 @@
         $(".rides-catalog").empty();
 
         $.get("api/v1/rides?page=" + nextPage, function (data) {
-        displayRides(data);
+            displayRideStats(data);
         });
     });
 
@@ -24,21 +24,22 @@
         $(".rides-catalog").empty();
 
         $.get("api/v1/rides?page=" + prevPage, function (data) {
-            displayRides(data);
+            displayRideStats(data);
         });
     });
 });
 
-function displayRides(rides)
+function displayRideStats(rides)
 {
-    $.each(rides, function () {
-        $(".rides-catalog").append("<li><a href='" + getRideUri(this.vehicle) + "'>" + this.vehicle.brand + " " + this.vehicle.model + " " + this.vehicle.year + "</a></li>");
+    $.each(rides, function (key, value) {
+        $(".rides-catalog").append("<li>" + key + "<a href='" + getRideUri(key) + "'><span class='vehicle-count'>" + value + "</span></a></li>");
     });
 
-    $("#count").text(rides.length + " találat");
+    $("#count").text(Object.keys(rides).length + " találat");
 }
 
 function getRideUri(vehicle)
 {
-    return "./catalog/ride?Brand=" + vehicle.brand + "&Model=" + vehicle.model + "&Year=" + vehicle.year;
+    vehicle = vehicle + "";
+    return "./catalog/ride?Brand=" + vehicle.split(" ")[1] + "&Model=" + vehicle.split(" ")[2] + "&Year=" + vehicle.split(" ")[0];
 }

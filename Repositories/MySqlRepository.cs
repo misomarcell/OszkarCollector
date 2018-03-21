@@ -8,12 +8,13 @@ namespace Repositories
 {
     public class MySqlRepository : IRepository
     {
+        private static readonly int PAGE_SIZE = 25;
+
         MySqlConnection Connection;
 
         public MySqlRepository()
         {
             //Connection = new MySqlConnection("server=127.0.0.1;user id=root;password=root;port=3306;database=oszkar;");
-            Connection = new MySqlConnection("server=oszkar-remote.mysql.database.azure.com;user id=remote@oszkar-remote;password=Szalmakalap123;port=3306;database=oszkar;");
 
             Connection.Open();
         }
@@ -35,13 +36,17 @@ namespace Repositories
             return (int)command.LastInsertedId;
         }
 
-        public List<RidePage> GetRides(int page)
+        public List<RidePage> GetVehicleRides(int page, Vehicle vehicle)
         {
-            MySqlCommand command = new MySqlCommand($@"SELECT DISTINCT * FROM `rides` GROUP BY vehicle_brand, vehicle_model, vehicle_year ORDER BY `vehicle_year` DESC LIMIT 25 OFFSET {page * 25};", Connection);
+            MySqlCommand command = new MySqlCommand($@"SELECT * FROM `rides` WHERE `vehicle_brand` = @vehicle_brand AND `vehicle_model` = @vehicle_model AND `vehicle_year` = @vehicle_year LIMIT 25 OFFSET {page * 25};", Connection);
+            command.Parameters.AddWithValue("vehicle_brand", vehicle.Brand);
+            command.Parameters.AddWithValue("vehicle_model", vehicle.Model);
+            command.Parameters.AddWithValue("vehicle_year", vehicle.Year);
+
             var result = command.ExecuteReader();
 
             var rides = new List<RidePage>();
-            while(result.Read())
+            while (result.Read())
             {
                 var ride = new RidePage()
                 {
@@ -53,7 +58,7 @@ namespace Repositories
                         Brand = result.GetString(3),
                         Model = result.GetString(4),
                         Year = result.GetInt32(5)
-                    },                
+                    },
                     Driver = new Driver()
                     {
                         Username = result.GetString(6),
@@ -61,7 +66,7 @@ namespace Repositories
                     }
                 };
 
-                rides.Add(ride);          
+                rides.Add(ride);
             }
 
             return rides;
@@ -76,6 +81,20 @@ namespace Repositories
         {
             MySqlCommand command = new MySqlCommand(@"TRUNCATE TABLE `rides`;", Connection);
             command.ExecuteNonQuery();
+        }
+
+        public Dictionary<Vehicle, int> GetVehicles(int page)
+        {
+            var dictionary = new Dictionary<Vehicle, int>();
+            MySqlCommand command = new MySqlCommand($@"SELECT DISTINCT `vehicle_brand`, `vehicle_model`, `vehicle_year`, COUNT(*) FROM `rides` GROUP BY `vehicle_brand`, `vehicle_model`, `vehicle_year` ORDER BY `vehicle_year` DESC LIMIT {PAGE_SIZE} OFFSET {page * PAGE_SIZE};", Connection);
+            var result = command.ExecuteReader();
+
+            while (result.Read())
+            {
+                dictionary.Add(new Vehicle(result.GetString(0), result.GetString(1), result.GetInt32(2)), result.GetInt32(3));
+            }
+
+            return dictionary;
         }
     }
 }
